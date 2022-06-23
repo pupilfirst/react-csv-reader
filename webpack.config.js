@@ -4,13 +4,17 @@ module.exports = {
   devtool: 'source-map',
   entry: './src/index.tsx',
   resolve: {
-    extensions: ['.ts', '.tsx'],
+    extensions: ['.js', '.ts', '.tsx'],
+  },
+  experiments: {
+    outputModule: true,
   },
   output: {
     filename: 'react-csv-reader.js',
-    path: path.resolve(__dirname, 'dist'),
-    library: 'CSVReader',
-    libraryTarget: 'commonjs2',
+    library: {
+      type: 'module',
+      export: 'default',
+    },
   },
   module: {
     rules: [
@@ -40,19 +44,5 @@ module.exports = {
         loader: 'source-map-loader',
       },
     ],
-  },
-  externals: {
-    react: {
-      commonjs: 'react',
-      commonjs2: 'react',
-      amd: 'react',
-      root: 'React',
-    },
-    'prop-types': {
-      commonjs: 'prop-types',
-      commonjs2: 'prop-types',
-      amd: 'prop-types',
-      root: 'PropTypes',
-    },
   },
 }
